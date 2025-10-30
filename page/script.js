@@ -1,8 +1,11 @@
 window.addEventListener("load", function () {
   const form = document.getElementById("myForm");
   const loading = document.getElementById("loading");
+  const errorDiv = document.getElementById("error");
 
-  function submitForm() {
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    errorDiv.style.display = "none";
     loading.style.display = "block";
 
     const xhr = new XMLHttpRequest();
@@ -18,32 +21,30 @@ window.addEventListener("load", function () {
           const response = xhr.responseText.trim();
 
           if (response === "SUCCESS") {
-            // Redirect after successful login
             window.location.href = "session.php";
           } else if (response === "INVALID") {
-            alert("Nom, email ou mot de passe incorrect ❌");
-            window.location.href = "index.html";
-
+            errorDiv.textContent = "❌ Nom, email ou mot de passe incorrect.";
+            errorDiv.style.display = "block";
+          } else if (response === "MISSING") {
+            errorDiv.textContent = "⚠️ Veuillez remplir tous les champs.";
+            errorDiv.style.display = "block";
           } else {
-            alert("Champs manquants ou erreur.");
-            window.location.href = "index.html";
-
+            errorDiv.textContent = "Erreur inconnue.";
+            errorDiv.style.display = "block";
           }
         } else {
-          alert("Erreur réseau: code " + xhr.status);
+          errorDiv.textContent = "Erreur réseau: " + xhr.status;
+          errorDiv.style.display = "block";
         }
       }
     };
 
     xhr.onerror = function () {
       loading.style.display = "none";
-      alert("Oups! Une erreur est survenue.");
+      errorDiv.textContent = "Oups! Une erreur est survenue.";
+      errorDiv.style.display = "block";
     };
 
     xhr.send(formData);
-  }
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    submitForm();
   });
 });
