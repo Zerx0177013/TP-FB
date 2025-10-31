@@ -1,15 +1,20 @@
 window.addEventListener("load", function () {
-  function submitForm() {
+  function submitForm(idPost) {
     var xhr = new XMLHttpRequest();
 
-    let index = parseInt(document.getElementById("num").textContent);
-    let actualPost = document.getElementById("post" + index);
-    let commentaire = actualPost.getElementById("comment").value;
+    let postActuel = document.getElementById("post" + idPost);
+    let comments = postActuel.getElementsByClassName("comments")[0];
+
+    var usr = document.getElementById("usr").value;
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
         if (xhr.status == 200) {
           var retour = JSON.parse(xhr.responseText);
 
+          let comContent = postActuel.getElementsById("comment" + idPost).value;
+          let com = document.createElement("p");
+          com.textContent = usr + ": " + comContent;
+          comments.appendChild(com);
         } else {
           document.dyn = "Error code " + xhr.status;
         }
@@ -20,11 +25,15 @@ window.addEventListener("load", function () {
     xhr.send(null);
   }
 
-  var form = document.getElementById("post");
+  var totalPost = parseInt(document.getElementById("num").textContent);
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
+  for (let i = 1; i <= totalPost; i++) {
+    var form = document.getElementById("post" + i);
 
-    submitForm();
-  });
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      submitForm(i);
+    });
+    }
 });

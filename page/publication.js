@@ -23,7 +23,7 @@ window.addEventListener("load", function () {
           let comment = document.createElement("input");
           comment.type = "text";
           comment.placeholder = "Ajouter un commentaire";
-          comment.id = "comment";
+          comment.id = "comment" + i;
           let commButton = document.createElement("button");
           commButton.textContent = "Commenter";
           commButton.className = "com";
