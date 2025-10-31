@@ -19,7 +19,7 @@
     </form>
 
     <div id="publications">
-
+    <p style="display: none" id="num">0</p>
     </div>
     <script src="publication.js"></script>
 </body>
