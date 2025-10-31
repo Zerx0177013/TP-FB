@@ -12,7 +12,7 @@
 </head>
 <body>
     <form id="post">
-        <input type="hidden" name="username" id="usr" value="<?php echo $user ?>">
+        <input type="hidden" name="username" id="usr" value="<?php echo $name ?>">
         <input type="text" name="publication" id="pub" placeholder="insérer votre publication">
         <br><br>
         <button type="submit">Publier</button>

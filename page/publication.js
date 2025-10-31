@@ -9,11 +9,29 @@ window.addEventListener("load", function () {
             if(xhr.readyState  == 4){
                 if(xhr.status  == 200) {
                     var retour = JSON.parse(xhr.responseText);
-            
+
                     let posts = document.getElementById("publications");
+                    
+                    let div = document.createElement("div");
+                    div.className = "post";
                     let text = document.createElement("p");
+                    
+                    let comment = document.createElement("input");
+                    comment.type = "text";
+                    comment.placeholder = "Ajouter un commentaire";
+                    comment.id = "comment";
+                    let commButton = document.createElement("button");
+                    commButton.textContent = "Commenter";
+                    commButton.className = "com";
+                    let commentSection = document.createElement("div");
+                    commentSection.className = "comments";
+
                     text.textContent = usr + ": " + post;
-                    posts.appendChild(text)
+                    div.appendChild(text);
+                    div.appendChild(comment);
+                    div.appendChild(commButton);
+                    div.appendChild(commentSection);
+                    posts.appendChild(div);
                 } else {
                     document.dyn="Error code " + xhr.status;
                 }
