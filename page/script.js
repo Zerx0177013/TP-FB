@@ -1,15 +1,15 @@
 window.addEventListener("load", function () {
-  const form = document.getElementById("myForm");
-  const loading = document.getElementById("loading");
-  const errorDiv = document.getElementById("error");
+  var form = document.getElementById("myForm");
+  var loading = document.getElementById("loading");
+  var errorDiv = document.getElementById("error");
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     errorDiv.style.display = "none";
     loading.style.display = "block";
 
-    const xhr = new XMLHttpRequest();
-    const formData = new FormData(form);
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData(form);
 
     xhr.open("POST", "formulaire.php", true);
 
@@ -18,7 +18,7 @@ window.addEventListener("load", function () {
         loading.style.display = "none";
 
         if (xhr.status === 200) {
-          const response = xhr.responseText.trim();
+          var response = xhr.responseText.trim();
 
           if (response === "SUCCESS") {
             window.location.href = "comment.php";
