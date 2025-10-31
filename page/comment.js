@@ -3,7 +3,14 @@ window.addEventListener("load", function () {
     var xhr = new XMLHttpRequest();
 
     let postActuel = document.getElementById("post" + idPost);
-    let comments = postActuel.getElementsByClassName("comments")[0];
+    const commentInput = postActuel.querySelector("#comment" + idPost);
+    const commentaire = commentInput.value.trim();
+
+    if (commentaire === "") {
+      alert("Veuillez écrire un commentaire !");
+      return;
+    }
+
 
     var usr = document.getElementById("usr").value;
     xhr.onreadystatechange = function () {
@@ -11,16 +18,20 @@ window.addEventListener("load", function () {
         if (xhr.status == 200) {
           var retour = JSON.parse(xhr.responseText);
 
-          let comContent = postActuel.getElementsById("comment" + idPost).value;
           let com = document.createElement("p");
-          com.textContent = usr + ": " + comContent;
+          com.textContent = usr + ": " + commentaire;
           comments.appendChild(com);
+          commentInput.value = "";
         } else {
           document.dyn = "Error code " + xhr.status;
         }
       }
     };
-    xhr.open("GET", "jsonCom.php?com=" + commentaire + "&username=" + usr, true);
+    xhr.open(
+      "GET",
+      "jsonCom.php?com=" + commentaire + "&username=" + usr,
+      true
+    );
 
     xhr.send(null);
   }
@@ -35,5 +46,5 @@ window.addEventListener("load", function () {
 
       submitForm(i);
     });
-    }
+  }
 });

@@ -26,17 +26,29 @@ window.addEventListener("load", function () {
           comment.id = "comment" + i;
           let commButton = document.createElement("button");
           commButton.textContent = "Commenter";
-          commButton.className = "com";
-          commButton.type = "submit";
+          commButton.className = "com" + i;
+          commButton.type = "button";
           let commentSection = document.createElement("div");
           commentSection.className = "comments";
 
           text.textContent = usr + ": " + post;
+
+          commButton.addEventListener("click", function () {
+            let txt = comment.value.trim();
+            if (txt !== "") {
+              let p = document.createElement("p");
+              p.textContent = usr + " : " + txt;
+              commentSection.appendChild(p);
+              comment.value = "";
+            }
+          });
+          
           div.appendChild(text);
           div.appendChild(comment);
           div.appendChild(commButton);
           div.appendChild(commentSection);
           posts.appendChild(div);
+          document.getElementById("pub").value = "";
         } else {
           document.dyn = "Error code " + xhr.status;
         }
