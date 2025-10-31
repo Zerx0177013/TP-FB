@@ -1,5 +1,5 @@
 <?php
-header("Location: ./page/publication.php");
+header("Location: ./page/index.html");
 
 
 ?>

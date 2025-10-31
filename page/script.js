@@ -21,7 +21,7 @@ window.addEventListener("load", function () {
           var response = xhr.responseText.trim();
 
           if (response === "SUCCESS") {
-            window.location.href = "comment.php";
+            window.location.href = "publication.php";
           } else if (response === "INVALID") {
             errorDiv.textContent = "❌ Nom, email ou mot de passe incorrect.";
             errorDiv.style.display = "block";

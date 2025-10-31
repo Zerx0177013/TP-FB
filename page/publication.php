@@ -1,6 +1,6 @@
 <?php
-    include "../include/data.php";
-    $user = $data[0]['Nom'];
+    session_start();
+    $name = $_SESSION["Nom"];
 ?>
 
 <!DOCTYPE html>
